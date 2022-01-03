@@ -1,0 +1,110 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{csquotes}
+\usepackage[british]{babel}
+\usepackage[backend=biber,style=apa]{biblatex}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{hyperref}
+\addbibresource{nushrepo.bib}
+
+\title{Project Charter \\ \vspace{2mm} \Large \textsc{NUSH Student Research Repository}}
+\author{Lairoongroj Jinnawat}
+\date{Version 1.1 --- 4 January 2022}
+
+\begin{document}
+
+\maketitle
+
+\section{Background}
+
+NUS High School of Mathematics and Science offers a six-year programme specialising in mathematics and science education. The Da Vinci Programme, led by the Department of Research, Innovation and Enterprise (RIE), is a unique and defining component of NUS High School’s curriculum. It culminates in the Advanced Research Project (ARP), where teams of 1-3 students collaborate with advisors and conduct research. The product is generally a research report, as well as a poster-aided presentation for an annual Research Congress \parencite{nus_high_school_research_nodate}. \\
+
+RIE has an extensive library of over 1000 research reports, ranging from ARPs to independently initiated research. These reports are invaluable to current students as references and inspiration for research. They will allow current students to build on the work of previous cohorts and extend interesting and valuable research. However, there is at present no easy way for students to freely search and access these reports. \\
+
+We wish to set up a research repository system. The system requirements are as such:
+
+\begin{enumerate}[label=\alph*)]
+    \item The Repository should be accessible only to current matriculated students and staff of NUS High School. Authentication is needed to access the system.
+    \item Reports should be accurately indexed and classified with keywords so that they are searchable.
+\end{enumerate}
+
+\section{Objectives}
+
+Understanding previously conducted research can save time and effort spent writing methodologies, designing statistical analyses, etc. More importantly, it allows researchers to gain novel, domain-specific insights and identify significant challenges and problems before they arise. \\
+
+The purposes of the proposed Research Repository are pedagogical as well as practical: students should learn how to access past findings in a way that maximises insights gained, including how to use institutional repositories and related technologies. \\
+
+Therefore, the primary objective of the project is to set up a Research Repository for students’ reports. Works and data in the Repository should be findable  and accessible in the context of NUS High School, following the FAIR principles for scientific data management (Wilkinson et al., 2016). The Repository’s database schema should be informed by the nature and form of ARPs, such as formatting/citation requirements and grading rubrics. It should implement keyword tagging and other rich and NUSH-relevant metadata, as well as search by keywords. A wide variety of datasets and file formats, ranging from the general (.csv, .png, .ipynb) to the more niche and field-specific (molecular file formats, GIS vector file formats), should also be supported and easily downloadable. \\
+	
+Secondary objectives include interoperability and reusability. Interoperability serves to future-proof the Repository, allowing future generations of students to improve upon and adapt it to the ever-evolving research landscape. Maintenance and documentation of the Repository and its source code are baselines for interoperability. Reusability allows students to consult authors if and when relevant to their research needs. Reusability also includes document version control. \\
+
+The Repository interface should be usable, with minimal prior guidance. It may resemble existing institutional repositories, such as DR-NTU\footnote{The Digital Repository of NTU. \url{https://dr.ntu.edu.sg/}} or ScholarBank@NUS\footnote{\url{https://scholarbank.nus.edu.sg/}}. \\
+
+The Repository should implement an appropriate level of permissioning and authentication. In particular, administrators should directly oversee uploading, editing, and deleting of files. If feasible, measurement and quantitative assessment of NUSH’s scholarly output should be implemented following Westell’s \parencite*{wilkinson_fair_2016} indicators of institutional repository success. \\
+
+Finally, Project Officers should also take into account training and onboarding staff members and students.
+
+\section{Methodology}
+
+Users can access the Repository’s research reports, relevant datasets, and their metadata via a web application. Integration into NUS High School’s eSpace portal will be explored. \\
+
+These data will be stored in a document-oriented database, which offers flexibility to meet changing application needs and scalability across a variety of data types \parencite{mongodb_document_nodate}. \\
+
+All documents and datasets associated with a given ARP will be indexed and tagged by keywords, rendering them searchable. Around 1000 ARPs conducted before the implementation of the Repository will be automatically tagged using machine learning algorithms. ARPs submitted after implementation will have keywords suggested by the Repository in addition to metadata furnished by authors. \\
+
+In machine learning terms, the problem is unsupervised or semi-supervised classification on a medium-size natural language dataset. We hope to explore semi-supervised Latent Dirichlet Allocation (ssLDA) \parencite{wang_semi-supervised_2012}, KEA \parencite{witten_kea_2005}, and TextRank \parencite{mihalcea_textrank_2004}. \\
+
+Proposed technology stack (as of 4 Jan 2022):
+
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Web application}
+    \begin{enumerate}[label=\roman*.]
+        \item Database: \texttt{MongoDB}
+        \item Backend \& frontend: \texttt{Django}
+    \end{enumerate}
+    \item \textbf{Keyword tagging}
+    \begin{enumerate}[label={}]
+        \item TextRank, KEA, \texttt{scikit-learn}
+    \end{enumerate}
+    \item \textbf{Codebase management \& deployment}
+    \begin{enumerate}[label=\roman*.]
+        \item GitHub
+        \item Docker (?)
+    \end{enumerate}
+\end{enumerate}
+
+\section{Work Schedule}
+
+The Repository will be developed and tested iteratively, deployed, and maintained by the Project Officer, with input and guidance by stakeholders. (Stakeholders include NUS High School, particularly RIE and current students who will provide direction and user feedback; as well as AppVenture, who will provide advice.) Delivery of the project will be measured against the objectives outlined above. \\
+
+Preliminarily, the project will span 5 months, commencing in January 2022 and concluding in May 2022. \\
+
+\begin{center}
+\underline{Timeline \& vendor monthly rate}
+\end{center}
+
+\centering
+\begin{tabular}{|rl|c|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Month}}                 & \multicolumn{1}{c|}{\textbf{Deliverables}} & \textbf{Rate (in SGD)}    \\ \hline
+\multicolumn{1}{|r|}{\multirow{3}{*}{January 2022}}  & Index research reports. Begin setting up   & \multirow{3}{*}{\$768.00} \\
+\multicolumn{1}{|r|}{} & Repository system, clarifying server   &            \\
+\multicolumn{1}{|r|}{} & interface and requirements.            &            \\ \hline
+\multicolumn{1}{|r|}{\multirow{2}{*}{February 2022}} &                                            & \multirow{2}{*}{\$768.00} \\
+\multicolumn{1}{|r|}{} & Develop Repository as web application, &            \\ \cline{1-1} \cline{3-3} 
+\multicolumn{1}{|r|}{\multirow{2}{*}{March 2022}}    & with user authentication and permissions.  & \multirow{2}{*}{\$768.00} \\
+\multicolumn{1}{|r|}{} & Upload research reports.               &            \\ \cline{1-1} \cline{3-3} 
+\multicolumn{1}{|r|}{\multirow{2}{*}{April 2022}}    & Refine indexing and keyword tagging.       & \multirow{2}{*}{\$768.00} \\
+\multicolumn{1}{|r|}{} &                                        &            \\ \hline
+\multicolumn{1}{|r|}{\multirow{2}{*}{May 2022}}      & Test and launch Repository. Submit         & \multirow{2}{*}{\$768.00} \\
+\multicolumn{1}{|r|}{} & documentation.                         &            \\ \hline
+\multicolumn{2}{|r|}{\textbf{Total}}                            & \$3,840.00 \\ \hline
+\end{tabular}
+
+
+\printbibliography[title={References}]
+
+
+\end{document}
